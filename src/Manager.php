@@ -20,6 +20,7 @@ use Vsch\TranslationManager\Models\Translation;
 use Vsch\TranslationManager\Models\UserLocales;
 use Vsch\TranslationManager\Repositories\Interfaces\ITranslatorRepository;
 use ZipArchive;
+use Illuminate\Support\Str;
 
 /**
  * Class Manager
@@ -959,8 +960,8 @@ class Manager
                     foreach ($matches[3] as $index => $key) {
                         $quote = $matches[2][$index][0];
                         $keyValue = $key[0];
-                        if ($quote == '\'' && !str_contains($keyValue, ["\"", "'", "->",]) ||
-                            $quote == '"' && !str_contains($keyValue, ["$", "\"", "'", "->",])
+                        if ($quote == '\'' && !Str::contains($keyValue, ["\"", "'", "->",]) ||
+                            $quote == '"' && !Str::contains($keyValue, ["$", "\"", "'", "->",])
                         ) {
                             if ($fileLines == null) {
                                 $fileLines = self::computeFileLines($fileContents);
